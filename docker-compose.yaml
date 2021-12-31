@@ -1,0 +1,40 @@
+version: '3.9'
+services:
+  eureka-server:
+    container_name: eureka-server
+    build:
+      context: eureka-server
+      dockerfile: Dockerfile
+    restart: on-failure
+    ports:
+      - 8761:8761
+    networks:
+      - service-discovery-network
+  country-service:
+    depends_on:
+      - eureka-server
+    build:
+      context: country-service
+      dockerfile: Dockerfile
+    restart: on-failure
+    ports:
+      - "8081-8082:8081"
+    networks:
+      - service-discovery-network
+  region-service:
+    depends_on:
+      - eureka-server
+    build:
+      context: region-service
+      dockerfile: Dockerfile
+    restart: on-failure
+    ports:
+      - 8080:8080
+    networks:
+      - service-discovery-network
+
+networks:
+  service-discovery-network:
+    name: service-discovery-network
+    attachable: true
+    driver: bridge

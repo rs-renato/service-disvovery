@@ -1,0 +1,43 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: region-service
+  datasource:
+    url: jdbc:h2:mem:region
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: sa
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    defer-datasource-initialization: true
+
+eureka:
+  client:
+    healthcheck:
+      enabled: true
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka/
+    registry-fetch-interval-seconds: 5
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+country-service:
+  ribbon:
+    ServerListRefreshInterval: 1000 # this override doesn't work for some reason. The default is 30s
+    eureka:
+      enabled: true
+
+logging:
+  level:
+    root: info
+    com.demo.registry: info
+    org.springframework.cloud.netflix.ribbon: debug
