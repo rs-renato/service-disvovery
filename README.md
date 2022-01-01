@@ -1,4 +1,7 @@
 # Service Discovery POC
+This POC is part of article published: https://www.linkedin.com/pulse/client-side-load-balance-spring-boot-microservice-docker-rodrigues/?published=t
+![Service Discovery POC](Service%20Discovery%20POC.drawio.png)
+
 These projects illustrate the service discovery & client load balance with microservices inter dependent.
 - Components
   - eureka-service: Netflix OSS Service discovery 
